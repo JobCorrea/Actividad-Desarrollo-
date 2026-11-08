@@ -1,0 +1,35 @@
+CLASE Articulo (Raíz de Agregado)
+    ATRIBUTO PRIVADO id: ArticuloId
+    ATRIBUTO PRIVADO autorId: UsuarioId
+    ATRIBUTO PRIVADO estado: EstadoEditorial
+    ATRIBUTO PRIVADO comentarios: Lista<Comentario>
+
+    CONSTRUCTOR(id: ArticuloId, autorId: UsuarioId, titulo: Cadena, contenido: Cadena)
+        VALIDAR QUE id, autorId, titulo Y contenido NO SEAN NULOS
+        ESTO.id = id
+        ESTO.autorId = autorId
+        ESTO.estado = EstadoEditorial.ENVIADO
+        ESTO.comentarios = NUEVA Lista()
+    FIN CONSTRUCTOR
+
+    // Firma del método que controla el acceso y garantiza la invariante de negocio
+    METODO agregarComentario(autorComentarioId: UsuarioId, texto: TextoComentario)
+        // INVARIANTE 1: No se permiten comentarios si el artículo fue rechazado
+        SI ESTO.estado ES IGUAL A EstadoEditorial.RECHAZADO ENTONCES
+            LANZAR ExcepcionDominio("No se pueden agregar comentarios a un artículo rechazado")
+        FIN SI
+
+        // INVARIANTE 2: Límite máximo de comentarios permitidos
+        SI ESTO.comentarios.TAMAÑO() >= 500 ENTONCES
+            LANZAR ExcepcionDominio("El artículo ha alcanzado el límite máximo de comentarios")
+        FIN SI
+
+        // Creación interna de la entidad Comentario protegida por la Raíz de Agregado
+        VARIABLE nuevoComentario = NUEVO Comentario(autorComentarioId, texto)
+        ESTO.comentarios.AGREGAR(nuevoComentario)
+    FIN METODO
+
+    METODO obtenerComentarios(): ListaLecturaUnica<Comentario>
+        RETORNAR COPIA_INMUTABLE(ESTO.comentarios)
+    FIN METODO
+FIN CLASE

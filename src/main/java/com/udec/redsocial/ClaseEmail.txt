@@ -1,0 +1,14 @@
+CLASE INMUTABLE Email
+    ATRIBUTO PRIVADO texto: Cadena
+
+    CONSTRUCTOR(valor: Cadena)
+        SI valor ES NULO O NO CUMPLE FORMATO DE CORREO ENTONCES
+            LANZAR ExcepcionDominio("Formato de email inválido")
+        FIN SI
+        ESTO.texto = valor
+    FIN CONSTRUCTOR
+
+    METODO obtenerValor(): Cadena
+        RETORNAR ESTO.texto
+    FIN METODO
+FIN CLASE

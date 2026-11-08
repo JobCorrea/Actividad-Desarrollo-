@@ -1,0 +1,23 @@
+CLASE Usuario
+    ATRIBUTO PRIVADO id: UserId
+    ATRIBUTO PRIVADO nombreUsuario: Cadena
+    ATRIBUTO PRIVADO correo: Email
+    ATRIBUTO PRIVADO activo: Booleano
+
+    CONSTRUCTOR(id: UserId, nombreUsuario: Cadena, correo: Email)
+        VALIDAR QUE id, nombreUsuario Y correo NO SEAN NULOS
+        ESTO.id = id
+        ESTO.nombreUsuario = nombreUsuario
+        ESTO.correo = correo
+        ESTO.activo = VERDADERO
+    FIN CONSTRUCTOR
+
+    METODO cambiarCorreo(nuevoCorreo: Email)
+        VALIDAR QUE nuevoCorreo NO SEA NULO
+        ESTO.correo = nuevoCorreo
+    FIN METODO
+
+    METODO desactivarCuenta()
+        ESTO.activo = FALSO
+    FIN METODO
+FIN CLASE
