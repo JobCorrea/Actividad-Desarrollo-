@@ -1,0 +1,26 @@
+INTERFAZ ModeracionContenidoService
+    METODO esContenidoApropiado(texto: TextoComentario): Booleano
+    METODO evaluarPublicacion(autor: Usuario, articulo: Articulo): Booleano
+FIN INTERFAZ
+
+CLASE ModeracionContenidoServiceImpl IMPLEMENTA ModeracionContenidoService
+
+    METODO esContenidoApropiado(texto: TextoComentario): Booleano
+        VALIDAR QUE texto NO SEA NULO
+        SI texto.obtenerValor().CONTIENE_PALABRAS_PROHIBIDAS() ENTONCES
+            RETORNAR FALSO
+        FIN SI
+        RETORNAR VERDADERO
+    FIN METODO
+
+    METODO evaluarPublicacion(autor: Usuario, articulo: Articulo): Booleano
+        // INVARIANTE: Un usuario inactivo no puede moderar ni publicar contenido
+        SI NO autor.esActivo() ENTONCES
+            LANZAR ExcepcionDominio("El usuario no está activo para realizar publicaciones")
+        FIN SI
+
+        // Aplica la validación sobre el contenido usando el Value Object
+        RETORNAR ESTO.esContenidoApropiado(articulo.obtenerContenido())
+    FIN METODO
+
+FIN CLASE
