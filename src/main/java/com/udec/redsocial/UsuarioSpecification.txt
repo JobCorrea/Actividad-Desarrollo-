@@ -1,0 +1,24 @@
+CLASE UsuarioAptoParaModeradorSpecification
+    
+    METODO esSatisfechaPor(usuario: Usuario): Booleano
+        VALIDAR QUE usuario NO SEA NULO
+
+        // Regla 1: El usuario debe estar activo
+        SI NO usuario.esActivo() ENTONCES
+            RETORNAR FALSO
+        FIN SI
+
+        // Regla 2: Su correo debe estar verificado
+        SI NO usuario.esCorreoVerificado() ENTONCES
+            RETORNAR FALSO
+        FIN SI
+
+        // Regla 3: Debe tener una antigüedad mínima en la plataforma (ej. 30 días)
+        SI usuario.obtenerAntiguedadEnDias() < 30 ENTONCES
+            RETORNAR FALSO
+        FIN SI
+
+        RETORNAR VERDADERO
+    FIN METODO
+
+FIN CLASE

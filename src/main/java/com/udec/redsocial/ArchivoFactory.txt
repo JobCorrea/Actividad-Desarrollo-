@@ -1,0 +1,16 @@
+CLASE ArticuloFactory
+    
+    METODO crearNuevoArticulo(autorId: UsuarioId, titulo: Cadena, contenido: Cadena): Articulo
+        // 1. Validaciones previas de entrada
+        VALIDAR QUE autorId, titulo Y contenido NO SEAN NULOS
+
+        // 2. Generación automática de la identidad del dominio (ArticuloId)
+        VARIABLE articuloId = NUEVO ArticuloId(GENERAR_UUID_ALEATORIO())
+
+        // 3. Creación y devolución de la Raíz de Agregado en estado inicial válido
+        VARIABLE articulo = NUEVO Articulo(articuloId, autorId, titulo, contenido)
+        
+        RETORNAR articulo
+    FIN METODO
+
+FIN CLASE

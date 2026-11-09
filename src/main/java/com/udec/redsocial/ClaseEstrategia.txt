@@ -1,0 +1,22 @@
+// Interfaz para la Estrategia (Strategy)
+INTERFAZ EstrategiaCalculoReputacion
+    METODO calcularPuntos(articulo: Articulo): Entero
+FIN INTERFAZ
+
+// Estrategia Concreta 1: Basada en interacciones estándar
+CLASE CalculoReputacionEstandar IMPLEMENTA EstrategiaCalculoReputacion
+    METODO calcularPuntos(articulo: Articulo): Entero
+        VARIABLE puntos = articulo.obtenerCantidadLikes() * 2
+        puntos = puntos + (articulo.obtenerCantidadComentarios() * 5)
+        RETORNAR puntos
+    FIN METODO
+FIN CLASE
+
+// Estrategia Concreta 2: Basada en publicaciones destacadas o de impacto
+CLASE CalculoReputacionDestacada IMPLEMENTA EstrategiaCalculoReputacion
+    METODO calcularPuntos(articulo: Articulo): Entero
+        VARIABLE puntos = articulo.obtenerCantidadLikes() * 4
+        puntos = puntos + (articulo.obtenerCantidadComentarios() * 10) + 100
+        RETORNAR puntos
+    FIN METODO
+FIN CLASE
