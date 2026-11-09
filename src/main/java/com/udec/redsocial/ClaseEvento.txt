@@ -1,0 +1,24 @@
+CLASE INMUTABLE ArticuloPublicadoEvent
+    ATRIBUTO PRIVADO articuloId: ArticuloId
+    ATRIBUTO PRIVADO autorId: UsuarioId
+    ATRIBUTO PRIVADO fechaOcurrencia: FechaHora
+
+    CONSTRUCTOR(articuloId: ArticuloId, autorId: UsuarioId)
+        VALIDAR QUE articuloId Y autorId NO SEAN NULOS
+        ESTO.articuloId = articuloId
+        ESTO.autorId = autorId
+        ESTO.fechaOcurrencia = OBTENER_FECHA_HORA_ACTUAL()
+    FIN CONSTRUCTOR
+
+    METODO obtenerArticuloId(): ArticuloId
+        RETORNAR ESTO.articuloId
+    FIN METODO
+
+    METODO obtenerAutorId(): UsuarioId
+        RETORNAR ESTO.autorId
+    FIN METODO
+
+    METODO obtenerFechaOcurrencia(): FechaHora
+        RETORNAR ESTO.fechaOcurrencia
+    FIN METODO
+FIN CLASE
